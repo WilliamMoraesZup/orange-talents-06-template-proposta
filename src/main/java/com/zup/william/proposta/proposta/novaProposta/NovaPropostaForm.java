@@ -1,6 +1,7 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
 import com.zup.william.proposta.proposta.shared.CPFOrCNPJ;
+import com.zup.william.proposta.proposta.shared.DeveSerUnico;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -22,7 +23,9 @@ public class NovaPropostaForm {
     @NotBlank
     private String endereco;
 
-    @NotBlank  @CPFOrCNPJ
+    @NotBlank
+    @CPFOrCNPJ
+    @DeveSerUnico(campo = "documento", entidade = NovaProposta.class)
     private String documento;
 
 
