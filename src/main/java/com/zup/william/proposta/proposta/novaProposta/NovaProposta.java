@@ -1,11 +1,10 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
+import com.zup.william.proposta.proposta.analiseCreditoClient.RetornoDaAnaliseRequest;
+import com.zup.william.proposta.proposta.analiseCreditoClient.EstadoPropostaEnum;
 import com.zup.william.proposta.proposta.shared.CPFOrCNPJ;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -30,9 +29,11 @@ public class NovaProposta {
     @NotBlank
     private String endereco;
 
-    @NotBlank @CPFOrCNPJ
+    @NotBlank
+    @CPFOrCNPJ
     private String documento;
-
+    @Enumerated(EnumType.STRING)
+    private EstadoPropostaEnum estadoProposta;
 
     @NotNull
     @Positive
@@ -54,4 +55,19 @@ public class NovaProposta {
     }
 
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void atualizaEstadoProposta(RetornoDaAnaliseRequest retornoProposta) {
+        this.estadoProposta = retornoProposta.getAnaliseStatusEnum().retornaSeElegivelOuNao();
+    }
 }

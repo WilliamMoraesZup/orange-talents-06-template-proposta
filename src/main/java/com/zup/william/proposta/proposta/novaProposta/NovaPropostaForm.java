@@ -33,7 +33,10 @@ public class NovaPropostaForm {
     @Positive
     private BigDecimal salario;
 
+
     public NovaProposta toModel() {
+
+
         return new NovaProposta(nome, email, endereco, documento, salario);
     }
 
