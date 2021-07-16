@@ -76,12 +76,7 @@ public class NovaProposta {
         this.estadoProposta = retornoProposta.getAnaliseStatusEnum().retornaSeElegivelOuNao();
     }
 
-    @Override
-    public String toString() {
-        return "NovaProposta{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", numeroCartao='" + numeroCartao + '\'' +
-                '}';
+    public EstadoPropostaEnum getEstadoProposta() {
+        return estadoProposta;
     }
 }

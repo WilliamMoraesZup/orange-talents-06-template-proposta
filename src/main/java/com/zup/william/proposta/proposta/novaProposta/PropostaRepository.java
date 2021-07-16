@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PropostaRepository extends JpaRepository<NovaProposta, String> {
+public interface PropostaRepository extends JpaRepository<NovaProposta, Long> {
 
     List<NovaProposta> findByEstadoPropostaAndNumeroCartao(EstadoPropostaEnum estado, String numeroCartao);
 

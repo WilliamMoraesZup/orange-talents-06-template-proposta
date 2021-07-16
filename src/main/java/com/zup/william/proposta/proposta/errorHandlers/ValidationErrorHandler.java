@@ -36,7 +36,7 @@ public class ValidationErrorHandler {
 
 
     @ExceptionHandler(ApiErroException.class)
-    public ResponseEntity<ErroPadronizado> handleDeveSerUnicoError(ApiErroException apiErroException) {
+    public ResponseEntity<ErroPadronizado> erroGenerico(ApiErroException apiErroException) {
         Collection<String> mensagensDeErros = new ArrayList();
 
         mensagensDeErros.add(apiErroException.getMotivo());
