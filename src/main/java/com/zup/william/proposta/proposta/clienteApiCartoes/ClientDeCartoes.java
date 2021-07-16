@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ClientDeCartoes {
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/cartoes", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, value = "/cartoes" )
     NumeroDoCartaoRequest solicitarNumeroCartao(@RequestParam Long idProposta);
 
 

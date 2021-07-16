@@ -8,7 +8,6 @@ public class NumeroDoCartaoRequest {
         this.id = id;
     }
 
-
     public NumeroDoCartaoRequest() {
     }
 
@@ -16,8 +15,10 @@ public class NumeroDoCartaoRequest {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "NumeroDoCartaoRequest{" +
+                "id='" + id + '\'' +
+                '}';
     }
-
 }

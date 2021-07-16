@@ -1,7 +1,8 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
-import com.zup.william.proposta.proposta.analiseCreditoClient.RetornoDaAnaliseRequest;
 import com.zup.william.proposta.proposta.analiseCreditoClient.EstadoPropostaEnum;
+import com.zup.william.proposta.proposta.analiseCreditoClient.RetornoDaAnaliseRequest;
+import com.zup.william.proposta.proposta.clienteApiCartoes.NumeroDoCartaoRequest;
 import com.zup.william.proposta.proposta.shared.CPFOrCNPJ;
 
 import javax.persistence.*;
@@ -32,12 +33,15 @@ public class NovaProposta {
     @NotBlank
     @CPFOrCNPJ
     private String documento;
+
     @Enumerated(EnumType.STRING)
     private EstadoPropostaEnum estadoProposta;
 
     @NotNull
     @Positive
     private BigDecimal salario;
+
+    private String numeroCartao;
 
     public NovaProposta(String nome, String email, String endereco, String documento, BigDecimal salario) {
         this.nome = nome;
@@ -50,6 +54,10 @@ public class NovaProposta {
     public NovaProposta() {
     }
 
+    public void atualizaNumeroCartao(NumeroDoCartaoRequest numeroRecebidoClient) {
+        this.numeroCartao = numeroRecebidoClient.getId();
+    }
+
     public Long getId() {
         return id;
     }
@@ -59,9 +67,6 @@ public class NovaProposta {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getDocumento() {
         return documento;
@@ -69,5 +74,14 @@ public class NovaProposta {
 
     public void atualizaEstadoProposta(RetornoDaAnaliseRequest retornoProposta) {
         this.estadoProposta = retornoProposta.getAnaliseStatusEnum().retornaSeElegivelOuNao();
+    }
+
+    @Override
+    public String toString() {
+        return "NovaProposta{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", numeroCartao='" + numeroCartao + '\'' +
+                '}';
     }
 }
