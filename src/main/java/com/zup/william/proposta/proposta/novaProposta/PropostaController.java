@@ -1,8 +1,8 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
 
-import com.zup.william.proposta.proposta.analiseCreditoClient.ClientDaAnalise;
 import com.zup.william.proposta.proposta.analiseCreditoClient.AnaliseDePropostaForm;
+import com.zup.william.proposta.proposta.analiseCreditoClient.ClientDaAnalise;
 import com.zup.william.proposta.proposta.analiseCreditoClient.RetornoDaAnaliseRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,11 +40,9 @@ public class PropostaController {
         Assert.notNull(proposta, "Houve um erro ao converter proposta em entidade");
         manager.persist(proposta);
 
-
         RetornoDaAnaliseRequest retorno = clientDaAnalise.enviarParaAnalise(new AnaliseDePropostaForm(proposta));
         proposta.atualizaEstadoProposta(retorno);
         manager.merge(proposta);
-
 
         URI uri = uriComponentsBuilder.path("/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
 
