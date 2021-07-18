@@ -2,6 +2,7 @@ package com.zup.william.proposta.proposta.novaProposta;
 
 import com.zup.william.proposta.proposta.analiseCreditoClient.EstadoPropostaEnum;
 import com.zup.william.proposta.proposta.analiseCreditoClient.RetornoDaAnaliseRequest;
+import com.zup.william.proposta.proposta.biometria.Biometria;
 import com.zup.william.proposta.proposta.clienteApiCartoes.NumeroDoCartaoRequest;
 import com.zup.william.proposta.proposta.shared.CPFOrCNPJ;
 
@@ -11,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -43,6 +46,10 @@ public class NovaProposta {
 
     private String numeroCartao;
 
+    @OneToMany(mappedBy = "dono", cascade = CascadeType.MERGE)
+    private Set<Biometria> biometrias = new HashSet<>();
+
+
     public NovaProposta(String nome, String email, String endereco, String documento, BigDecimal salario) {
         this.nome = nome;
         this.email = email;
@@ -58,18 +65,9 @@ public class NovaProposta {
         this.numeroCartao = numeroRecebidoClient.getId();
     }
 
-    public Long getId() {
-        return id;
-    }
+    public void adicionaBiometria(Biometria biometria) {
 
-
-    public String getNome() {
-        return nome;
-    }
-
-
-    public String getDocumento() {
-        return documento;
+        this.biometrias.add(biometria);
     }
 
     public void atualizaEstadoProposta(RetornoDaAnaliseRequest retornoProposta) {
@@ -78,5 +76,17 @@ public class NovaProposta {
 
     public EstadoPropostaEnum getEstadoProposta() {
         return estadoProposta;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDocumento() {
+        return documento;
     }
 }
