@@ -31,13 +31,6 @@ public class PropostaController {
     @Autowired
     ClientDaAnalise clientDaAnalise;
 
-    @PostMapping("/teste")
-    public void teste() {
-        System.out.println("FUNCIONEIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-
-
-    }
-
     @PostMapping("/proposta")
     @Transactional
     public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaForm form, UriComponentsBuilder uriComponentsBuilder) {

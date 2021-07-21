@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 import javax.validation.constraints.NotBlank;
 
 
-public class ValidaCodificacaoBiometria implements ConstraintValidator<ValidaBiometria, String> {
+public class ValidaBiometriaValidator implements ConstraintValidator<ValidaBiometria, String> {
 
 
     @Override

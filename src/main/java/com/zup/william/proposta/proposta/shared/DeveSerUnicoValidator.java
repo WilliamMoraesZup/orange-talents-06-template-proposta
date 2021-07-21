@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ValidaUnicidadeSistemaValidator implements ConstraintValidator<DeveSerUnico, String> {
+public class DeveSerUnicoValidator implements ConstraintValidator<DeveSerUnico, String> {
 
     private String campo;
     private Class entidade;

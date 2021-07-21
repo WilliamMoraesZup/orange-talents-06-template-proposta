@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 
 @NotBlank
 @ConstraintComposition(CompositionType.OR) // specifies OR as boolean operator instead of AND
-@Constraint(validatedBy = {ValidaCodificacaoBiometria.class})
+@Constraint(validatedBy = {ValidaBiometriaValidator.class})
 @Documented
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
