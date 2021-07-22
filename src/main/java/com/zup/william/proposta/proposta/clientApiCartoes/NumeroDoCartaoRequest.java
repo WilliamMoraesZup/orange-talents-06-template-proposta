@@ -1,4 +1,4 @@
-package com.zup.william.proposta.proposta.clienteApiCartoes;
+package com.zup.william.proposta.proposta.clientApiCartoes;
 
 public class NumeroDoCartaoRequest {
 

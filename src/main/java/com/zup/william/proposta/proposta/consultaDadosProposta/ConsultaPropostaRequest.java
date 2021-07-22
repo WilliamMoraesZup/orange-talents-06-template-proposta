@@ -1,6 +1,6 @@
 package com.zup.william.proposta.proposta.consultaDadosProposta;
 
-import com.zup.william.proposta.proposta.analiseCreditoClient.EstadoPropostaEnum;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoPropostaEnum;
 import com.zup.william.proposta.proposta.novaProposta.NovaProposta;
 
 public class ConsultaPropostaRequest {

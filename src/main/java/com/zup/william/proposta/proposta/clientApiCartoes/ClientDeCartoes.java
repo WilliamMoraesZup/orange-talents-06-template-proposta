@@ -1,4 +1,4 @@
-package com.zup.william.proposta.proposta.clienteApiCartoes;
+package com.zup.william.proposta.proposta.clientApiCartoes;
 
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(url ="http://contas:9999/api", name = "solicitaCartao")
+@FeignClient(url ="${url.conta}", name = "solicitaCartao")
 public interface ClientDeCartoes {
 
 

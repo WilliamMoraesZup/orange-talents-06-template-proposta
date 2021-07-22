@@ -1,9 +1,9 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
 
-import com.zup.william.proposta.proposta.analiseCreditoClient.AnaliseDePropostaForm;
-import com.zup.william.proposta.proposta.analiseCreditoClient.ClientDaAnalise;
-import com.zup.william.proposta.proposta.analiseCreditoClient.RetornoDaAnaliseRequest;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.AnaliseDePropostaForm;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.ClientDaAnalise;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.RetornoDaAnaliseRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

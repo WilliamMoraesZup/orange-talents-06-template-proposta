@@ -21,7 +21,7 @@ public class CartaoBloqueado {
     private String numeroCartao;
 
     @NotBlank
-    private String ipMaquina =InetAddress.getLocalHost().getHostAddress();
+    private String ipMaquina = InetAddress.getLocalHost().getHostAddress();
 
     @NotNull
     private Instant instanteBloqueio = Instant.now();
@@ -30,10 +30,7 @@ public class CartaoBloqueado {
     private String userAgent;
 
 
-    private SituacaoENUM situacao = SituacaoENUM.BLOQUEADO;
-
     public CartaoBloqueado(String numeroCartao, String userAgent) throws UnknownHostException {
-
         this.numeroCartao = numeroCartao;
         this.userAgent = userAgent;
     }

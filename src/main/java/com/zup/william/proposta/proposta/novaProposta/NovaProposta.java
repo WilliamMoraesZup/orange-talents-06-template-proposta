@@ -1,9 +1,9 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
-import com.zup.william.proposta.proposta.analiseCreditoClient.EstadoPropostaEnum;
-import com.zup.william.proposta.proposta.analiseCreditoClient.RetornoDaAnaliseRequest;
 import com.zup.william.proposta.proposta.biometria.Biometria;
-import com.zup.william.proposta.proposta.clienteApiCartoes.NumeroDoCartaoRequest;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoPropostaEnum;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.RetornoDaAnaliseRequest;
+import com.zup.william.proposta.proposta.clientApiCartoes.NumeroDoCartaoRequest;
 import com.zup.william.proposta.proposta.shared.CPFOrCNPJ;
 
 import javax.persistence.*;
@@ -74,6 +74,10 @@ public class NovaProposta {
         this.estadoProposta = retornoProposta.getAnaliseStatusEnum().retornaSeElegivelOuNao();
     }
 
+    public void bloqueiaCartao() {
+        this.estadoProposta = EstadoPropostaEnum.BLOQUEADO;
+    }
+
     public EstadoPropostaEnum getEstadoProposta() {
         return estadoProposta;
     }
@@ -88,5 +92,15 @@ public class NovaProposta {
 
     public String getDocumento() {
         return documento;
+    }
+
+    @Override
+    public String toString() {
+        return "NovaProposta{" +
+                "id=" + id +
+
+                ", numeroCartao='" + numeroCartao + '\'' +
+                ", biometrias=" + biometrias +
+                '}';
     }
 }

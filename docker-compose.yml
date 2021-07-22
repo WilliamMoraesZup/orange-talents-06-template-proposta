@@ -1,9 +1,5 @@
 version: '3.3'
 services:
-  #    web:
-  #      environment:
-  #        PROPOSTA_DATABASE_URL: jdbc:mysql://root:123456@mysql:3333/desafioproposta?createDatabaseIfNotExist=true
-
 
   zookeeper:
     image: "confluentinc/cp-zookeeper:5.2.1"

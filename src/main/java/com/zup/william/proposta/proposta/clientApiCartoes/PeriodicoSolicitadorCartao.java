@@ -1,6 +1,6 @@
-package com.zup.william.proposta.proposta.clienteApiCartoes;
+package com.zup.william.proposta.proposta.clientApiCartoes;
 
-import com.zup.william.proposta.proposta.analiseCreditoClient.EstadoPropostaEnum;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoPropostaEnum;
 import com.zup.william.proposta.proposta.novaProposta.NovaProposta;
 import com.zup.william.proposta.proposta.novaProposta.PropostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

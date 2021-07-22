@@ -1,4 +1,4 @@
-package com.zup.william.proposta.proposta.analiseCreditoClient;
+package com.zup.william.proposta.proposta.clientAnaliseCredito;
 
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(url="http://analise:9999/api", name = "analiseDeCredito")
+@FeignClient(url="${url.analise}", name = "analiseDeCredito")
 public interface ClientDaAnalise {
 
 

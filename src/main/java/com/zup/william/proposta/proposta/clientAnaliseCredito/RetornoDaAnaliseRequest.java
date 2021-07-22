@@ -1,4 +1,4 @@
-package com.zup.william.proposta.proposta.analiseCreditoClient;
+package com.zup.william.proposta.proposta.clientAnaliseCredito;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
