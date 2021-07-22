@@ -1,12 +1,7 @@
 package com.zup.william.proposta.proposta.prometheus;
 
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.Tag;
+import io.micrometer.core.instrument.*;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Component
 public class MinhasMetricas {
@@ -17,13 +12,23 @@ public class MinhasMetricas {
         this.meterRegistry = meterRegistry;
     }
 
-    public void meuContador() {
-        Collection<Tag> tags = new ArrayList<>();
-        tags.add(Tag.of("Nova proposta", "Mastercard"));
+    public void meuContador(String feature, String situacao) {
+        Counter contador = Counter.builder("Propostas Criadas")
+                .description("qtde de prostas criadas")
+                .tags(Tags.of(Tag.of(feature, situacao)))
+                .baseUnit("propostaria").register(meterRegistry);
+        contador.increment();
 
-        Counter contadorDePropostasCriadas = this.meterRegistry.counter("proposta_criada", tags);
-        contadorDePropostasCriadas.increment();
 
+    }
+
+    public void recordTime(String feature, String situacao) {
+        Timer metricaTempo = Timer.builder("Tempo de execucao")
+                .description("Latencia na criacao de propostas")
+                .tags(Tags.of(Tag.of(feature, situacao)))
+                .register(meterRegistry);
+
+        metricaTempo.record(() -> this);
     }
 
 }

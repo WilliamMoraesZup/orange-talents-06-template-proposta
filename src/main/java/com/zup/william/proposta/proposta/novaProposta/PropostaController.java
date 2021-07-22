@@ -28,17 +28,18 @@ public class PropostaController {
     private final Logger logger = LoggerFactory.getLogger(PropostaController.class);
 
 
+    @Autowired
+    private MinhasMetricas metricas;
     @PersistenceContext
     private EntityManager manager;
 
     @Autowired
     private ClientDaAnalise clientDaAnalise;
-    @Autowired
-    private MinhasMetricas metricas;
 
     @PostMapping("/proposta")
     @Transactional
     public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaForm form, UriComponentsBuilder uriComponentsBuilder) {
+        metricas.recordTime("nova proposta", "Sem restricao");
 
         NovaProposta proposta = form.toModel();
         Assert.notNull(proposta, "Houve um erro ao converter proposta em entidade");
@@ -51,13 +52,19 @@ public class PropostaController {
             proposta.atualizaEstadoProposta(EstadoAnaliseEnum.SEM_RESTRICAO);
             manager.merge(proposta);
             logger.info("Proposta criada com sucesso!");
-            metricas.meuContador();
+
+            metricas.meuContador("nova proposta", "Sem restricao");
+
 
             return ResponseEntity.created(uri).build();
         } catch (FeignException e) {  //salva com restricao
+            metricas.recordTime("nova proposta", "Com restricao");
             proposta.atualizaEstadoProposta(EstadoAnaliseEnum.COM_RESTRICAO);
             manager.merge(proposta);
             logger.info("Proposta criada com sucesso, porém com restriçao!");
+
+            metricas.meuContador("nova proposta", "Com restricao");
+
             return ResponseEntity.created(uri).build();
         }
 
