@@ -1,6 +1,7 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
 import com.zup.william.proposta.proposta.biometria.Biometria;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoAnaliseEnum;
 import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoPropostaEnum;
 import com.zup.william.proposta.proposta.clientAnaliseCredito.RetornoDaAnaliseRequest;
 import com.zup.william.proposta.proposta.clientApiCartoes.NumeroDoCartaoRequest;
@@ -70,8 +71,8 @@ public class NovaProposta {
         this.biometrias.add(biometria);
     }
 
-    public void atualizaEstadoProposta(RetornoDaAnaliseRequest retornoProposta) {
-        this.estadoProposta = retornoProposta.getAnaliseStatusEnum().retornaSeElegivelOuNao();
+    public void atualizaEstadoProposta(EstadoAnaliseEnum retornoProposta) {
+        this.estadoProposta = retornoProposta.retornaSeElegivelOuNao();
     }
 
     public void bloqueiaCartao() {

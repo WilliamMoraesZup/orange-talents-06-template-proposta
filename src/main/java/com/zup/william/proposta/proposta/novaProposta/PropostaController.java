@@ -3,7 +3,10 @@ package com.zup.william.proposta.proposta.novaProposta;
 
 import com.zup.william.proposta.proposta.clientAnaliseCredito.AnaliseDePropostaForm;
 import com.zup.william.proposta.proposta.clientAnaliseCredito.ClientDaAnalise;
+import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoAnaliseEnum;
 import com.zup.william.proposta.proposta.clientAnaliseCredito.RetornoDaAnaliseRequest;
+import com.zup.william.proposta.proposta.prometheus.MinhasMetricas;
+import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,9 @@ public class PropostaController {
     private EntityManager manager;
 
     @Autowired
-    ClientDaAnalise clientDaAnalise;
+    private ClientDaAnalise clientDaAnalise;
+    @Autowired
+    private MinhasMetricas metricas;
 
     @PostMapping("/proposta")
     @Transactional
@@ -39,15 +44,23 @@ public class PropostaController {
         Assert.notNull(proposta, "Houve um erro ao converter proposta em entidade");
         manager.persist(proposta);
 
-        RetornoDaAnaliseRequest retorno = clientDaAnalise.enviarParaAnalise(new AnaliseDePropostaForm(proposta));
-        proposta.atualizaEstadoProposta(retorno);
-        manager.merge(proposta);
-
         URI uri = uriComponentsBuilder.path("/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
 
-        logger.info("Proposta criada com sucesso!");
+        try { //200 salva sem retrição
+            RetornoDaAnaliseRequest retorno = clientDaAnalise.enviarParaAnalise(new AnaliseDePropostaForm(proposta));
+            proposta.atualizaEstadoProposta(EstadoAnaliseEnum.SEM_RESTRICAO);
+            manager.merge(proposta);
+            logger.info("Proposta criada com sucesso!");
+            metricas.meuContador();
 
-        return ResponseEntity.created(uri).build();
+            return ResponseEntity.created(uri).build();
+        } catch (FeignException e) {  //salva com restricao
+            proposta.atualizaEstadoProposta(EstadoAnaliseEnum.COM_RESTRICAO);
+            manager.merge(proposta);
+            logger.info("Proposta criada com sucesso, porém com restriçao!");
+            return ResponseEntity.created(uri).build();
+        }
+
 
     }
 
