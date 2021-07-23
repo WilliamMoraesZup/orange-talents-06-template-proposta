@@ -1,11 +1,10 @@
 package com.zup.william.proposta.proposta.carteira;
 
 
-import com.zup.william.proposta.proposta.avisoVIagem.ViagemFormParaClient;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
@@ -14,7 +13,7 @@ import java.util.Map;
 public interface ClientAssociaCarteira {
 
     @PostMapping(value = "/cartoes/{id}/carteiras")
-    Map<String, Object> associarPaypal(@PathVariable String id, @RequestBody PaypalParaClientForm form);
+    Map<String, Object> associarCartao(@PathVariable String id, CarteiraParaClientForm form);
 
 }
 

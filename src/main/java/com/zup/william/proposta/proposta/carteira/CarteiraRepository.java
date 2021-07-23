@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface CarteiraPayPalRepository extends JpaRepository<CarteiraPayPal, Long> {
+public interface CarteiraRepository extends JpaRepository<Carteira, Long> {
 
-    Optional<NovaProposta> findByNumeroCartao(String idCartao);
+    Optional<Carteira> findByNumeroCartaoAndCarteira(String idCartao, CarteiraEnum carteira);
 
 }

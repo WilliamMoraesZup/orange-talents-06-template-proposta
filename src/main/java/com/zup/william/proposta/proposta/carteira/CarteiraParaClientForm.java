@@ -2,22 +2,20 @@ package com.zup.william.proposta.proposta.carteira;
 
 import javax.validation.constraints.NotBlank;
 
-public class PaypalParaClientForm {
+public class CarteiraParaClientForm {
     @NotBlank
     private String email;
     @NotBlank
-    private String carteira;
+    private CarteiraEnum carteira;
 
     public String getEmail() {
         return email;
     }
 
-    public String getCarteira() {
-        return carteira;
-    }
 
-    public PaypalParaClientForm(String idCarteira, String email) {
+
+    public CarteiraParaClientForm(CarteiraEnum carteira, String email) {
         this.email =email;
-        this.carteira = idCarteira;
+        this.carteira = carteira;
     }
 }

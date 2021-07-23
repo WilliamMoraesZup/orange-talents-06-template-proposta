@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -26,39 +26,36 @@ public class CarteiraController {
     private PropostaRepository repositoryProposta;
 
     @Autowired
-    private CarteiraPayPalRepository repositoryPaypal;
+    private CarteiraRepository repositoryCarteira;
 
     @Autowired
     private ClientAssociaCarteira clientCarteira;
 
 
-    @PostMapping("/carteira/{numeroCartao}/paypal")
+    @PostMapping("/carteira/{numeroCartao}")
     @Transactional
-    public ResponseEntity<?> associarPaypal(@RequestBody @Valid PaypalForm form,
-                                            @PathVariable String numeroCartao, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> associarPaypal(@RequestBody @Valid CarteiraForm form,
+                                            @PathVariable String numeroCartao) {
 
-        Optional<NovaProposta> byNumeroCartao = repositoryProposta.findByNumeroCartao(numeroCartao);
-
+        Optional<NovaProposta> found = repositoryProposta.findByNumeroCartao(numeroCartao);
         //404
-        if (byNumeroCartao.isEmpty()) {
+        if (found.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        Optional<NovaProposta> cartaoJaAssociado = repositoryPaypal.findByNumeroCartao(numeroCartao);
-
+        Optional<Carteira> cartaoJaAssociado = repositoryCarteira.findByNumeroCartaoAndCarteira(numeroCartao, form.getCarteiraEnum());
         // 422
         if (cartaoJaAssociado.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
 
-
         try {
-            PaypalParaClientForm paraClient = new PaypalParaClientForm("id da carteira", form.getEmail());
+            Map<String, Object> retorno = clientCarteira.associarCartao(numeroCartao, new CarteiraParaClientForm(form.getCarteiraEnum(), form.getEmail()));
 
-            clientCarteira.associarPaypal(numeroCartao, paraClient);
+            Carteira novaCarteira = form.toModel(numeroCartao);
 
-            CarteiraPayPal novaCarteiraPayPal = form.toModel(numeroCartao);
-            URI uri = uriComponentsBuilder.path("/carteiraPaypal/{id}").buildAndExpand(novaCarteiraPayPal.getId()).toUri();
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaCarteira.getId()).toUri();
+            repositoryCarteira.save(novaCarteira);
 
             return ResponseEntity.created(uri).build();
 

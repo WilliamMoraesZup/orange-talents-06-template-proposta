@@ -1,14 +1,12 @@
 package com.zup.william.proposta.proposta.carteira;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class CarteiraPayPal {
+public class Carteira {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +19,21 @@ public class CarteiraPayPal {
     @NotBlank
     private String numeroCartao;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private CarteiraEnum carteira;
+
 
     public Long getId() {
         return id;
     }
 
-    public CarteiraPayPal(String email, String numeroCartao) {
+    public Carteira(String email, String numeroCartao, CarteiraEnum carteiraEnum) {
         this.email = email;
         this.numeroCartao = numeroCartao;
+        this.carteira = carteiraEnum;
+    }
+
+    public Carteira() {
     }
 }
