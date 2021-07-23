@@ -43,9 +43,6 @@ public class BloqueioCartaoController {
         if (cartaoJaBloqueado.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Esse cartão já está bloqueado");
         }
-
-
-
         String idCartao = numeroCartao.getNumeroCartao();
 
         try {

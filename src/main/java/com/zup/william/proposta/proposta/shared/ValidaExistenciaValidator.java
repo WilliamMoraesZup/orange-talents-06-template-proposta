@@ -22,18 +22,18 @@ public class ValidaExistenciaValidator implements ConstraintValidator<ValidaExis
     @Override
     public void initialize(ValidaExistencia constraintAnnotation) {
         campo = constraintAnnotation.campo();
-        entidade = constraintAnnotation.entidade();
+        entidade = constraintAnnotation.entidade();  System.out.println("TO VALINDADOD");
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
 
-
+        System.out.println("TO VALINDADOD");
         Query query = manager.createQuery("select 1 from " + entidade.getName() + " where " + campo + "=:value");
         query.setParameter("value", value);
 
         List<?> list = query.getResultList();
-        Assert.isTrue(list.size() <2, "Existe um bug no sistema pois foram encontrados mais de um registro no sistema");
+        Assert.isTrue(list.size() < 2, "Existe um bug no sistema pois foram encontrados mais de um registro no sistema");
         if (list.size() < 1) {
             throw new ApiErroException(HttpStatus.NOT_FOUND, "O cartão informado não foi encontrado");
         }
