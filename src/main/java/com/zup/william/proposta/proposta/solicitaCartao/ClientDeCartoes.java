@@ -1,4 +1,4 @@
-package com.zup.william.proposta.proposta.clientApiCartoes;
+package com.zup.william.proposta.proposta.solicitaCartao;
 
 
 import org.springframework.cloud.openfeign.FeignClient;

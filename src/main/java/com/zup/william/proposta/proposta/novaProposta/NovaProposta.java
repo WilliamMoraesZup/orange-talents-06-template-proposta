@@ -1,10 +1,9 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
 import com.zup.william.proposta.proposta.biometria.Biometria;
-import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoAnaliseEnum;
-import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoPropostaEnum;
-import com.zup.william.proposta.proposta.clientAnaliseCredito.RetornoDaAnaliseRequest;
-import com.zup.william.proposta.proposta.clientApiCartoes.NumeroDoCartaoRequest;
+import com.zup.william.proposta.proposta.analiseCredito.EstadoAnaliseEnum;
+import com.zup.william.proposta.proposta.analiseCredito.EstadoPropostaEnum;
+import com.zup.william.proposta.proposta.solicitaCartao.NumeroDoCartaoRequest;
 import com.zup.william.proposta.proposta.shared.CPFOrCNPJ;
 
 import javax.persistence.*;

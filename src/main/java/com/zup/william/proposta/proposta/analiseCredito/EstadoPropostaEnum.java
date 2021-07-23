@@ -1,4 +1,4 @@
-package com.zup.william.proposta.proposta.clientAnaliseCredito;
+package com.zup.william.proposta.proposta.analiseCredito;
 
 public enum EstadoPropostaEnum {
 

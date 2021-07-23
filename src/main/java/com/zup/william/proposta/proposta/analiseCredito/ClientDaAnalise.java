@@ -1,4 +1,4 @@
-package com.zup.william.proposta.proposta.clientAnaliseCredito;
+package com.zup.william.proposta.proposta.analiseCredito;
 
 
 import org.springframework.cloud.openfeign.FeignClient;

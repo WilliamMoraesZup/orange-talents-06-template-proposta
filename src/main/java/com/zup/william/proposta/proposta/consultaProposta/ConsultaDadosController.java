@@ -1,4 +1,4 @@
-package com.zup.william.proposta.proposta.consultaDadosProposta;
+package com.zup.william.proposta.proposta.consultaProposta;
 
 import com.zup.william.proposta.proposta.errorHandlers.ApiErroException;
 import com.zup.william.proposta.proposta.novaProposta.NovaProposta;

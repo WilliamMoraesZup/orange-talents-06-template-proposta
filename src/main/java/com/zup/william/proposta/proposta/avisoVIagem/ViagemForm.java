@@ -21,4 +21,12 @@ public class ViagemForm {
     public Viagem toModel(String userAgent, String numeroCartao, String ip) {
         return new Viagem(numeroCartao, destino, dataTermino, ip, userAgent);
     }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public LocalDate getDataTermino() {
+        return dataTermino;
+    }
 }

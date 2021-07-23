@@ -1,10 +1,10 @@
 package com.zup.william.proposta.proposta.novaProposta;
 
 
-import com.zup.william.proposta.proposta.clientAnaliseCredito.AnaliseDePropostaForm;
-import com.zup.william.proposta.proposta.clientAnaliseCredito.ClientDaAnalise;
-import com.zup.william.proposta.proposta.clientAnaliseCredito.EstadoAnaliseEnum;
-import com.zup.william.proposta.proposta.clientAnaliseCredito.RetornoDaAnaliseRequest;
+import com.zup.william.proposta.proposta.analiseCredito.AnaliseDePropostaForm;
+import com.zup.william.proposta.proposta.analiseCredito.ClientDaAnalise;
+import com.zup.william.proposta.proposta.analiseCredito.EstadoAnaliseEnum;
+import com.zup.william.proposta.proposta.analiseCredito.RetornoDaAnaliseRequest;
 import com.zup.william.proposta.proposta.prometheus.MinhasMetricas;
 import feign.FeignException;
 import org.slf4j.Logger;
