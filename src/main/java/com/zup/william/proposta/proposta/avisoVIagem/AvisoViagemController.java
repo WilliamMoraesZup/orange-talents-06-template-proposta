@@ -35,10 +35,9 @@ public class AvisoViagemController {
         if (optional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
         try {
-
             Map<String, Object> stringObjectMap = clientViagem.informarViagem(numeroCartao, new ViagemFormParaClient(form));
-
             Viagem novoAviso = form.toModel(userAgent, numeroCartao, InetAddress.getLocalHost().getHostAddress());
             repositoryViagem.save(novoAviso);
 
@@ -46,9 +45,7 @@ public class AvisoViagemController {
         } catch (FeignException e) {
             System.out.println(e);
             return ResponseEntity.status(422).body("erro no cliente, tente novamente");
-
         }
-
 
     }
 }
