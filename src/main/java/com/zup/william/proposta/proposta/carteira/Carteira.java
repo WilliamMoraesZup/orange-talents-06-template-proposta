@@ -19,7 +19,6 @@ public class Carteira {
     @NotBlank
     private String numeroCartao;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private CarteiraEnum carteira;
 

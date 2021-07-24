@@ -13,7 +13,7 @@ import java.util.Map;
 public interface ClientInformarViagem {
 
     @PostMapping(value = "/cartoes/{id}/avisos")
-    Map<String, Object> informarViagem(@PathVariable String id, @RequestBody ViagemFormParaClient form);
+    Map<String, Object> informarViagem(@PathVariable(value = "id") String id, @RequestBody ViagemFormParaClient form);
 
 }
 

@@ -7,6 +7,8 @@ import com.zup.william.proposta.proposta.analiseCredito.EstadoAnaliseEnum;
 import com.zup.william.proposta.proposta.analiseCredito.RetornoDaAnaliseRequest;
 import com.zup.william.proposta.proposta.prometheus.MinhasMetricas;
 import feign.FeignException;
+import io.opentracing.Span;
+import io.opentracing.Tracer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +38,19 @@ public class PropostaController {
     @Autowired
     private ClientDaAnalise clientDaAnalise;
 
+    private final Tracer tracer;
+
+    public PropostaController(Tracer tracer) {
+        this.tracer = tracer;
+    }
+
     @PostMapping("/proposta")
     @Transactional
     public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaForm form, UriComponentsBuilder uriComponentsBuilder) {
+        Span activeSpan = tracer.activeSpan();
+        activeSpan.setTag("user.email", "luram.archanjo@zup.com.br");
+        activeSpan.log("Meu log");
+
         metricas.recordTime("nova proposta", "Sem restricao");
 
         NovaProposta proposta = form.toModel();

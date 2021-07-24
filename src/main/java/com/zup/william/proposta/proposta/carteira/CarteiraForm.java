@@ -12,8 +12,7 @@ public class CarteiraForm {
     @Email
     private String email;
 
-    @NotNull
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private CarteiraEnum carteira;
 
 
@@ -23,6 +22,7 @@ public class CarteiraForm {
     }
 
     public Carteira toModel(String numeroCartao) {
+        System.out.println(carteira);
         return new Carteira(email, numeroCartao, carteira);
     }
 

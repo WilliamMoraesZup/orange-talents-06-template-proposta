@@ -42,7 +42,7 @@ public class CarteiraController {
         if (found.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
+        System.out.println(form.getCarteiraEnum());
         Optional<Carteira> cartaoJaAssociado = repositoryCarteira.findByNumeroCartaoAndCarteira(numeroCartao, form.getCarteiraEnum());
         // 422
         if (cartaoJaAssociado.isPresent()) {
@@ -55,6 +55,8 @@ public class CarteiraController {
             Carteira novaCarteira = form.toModel(numeroCartao);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaCarteira.getId()).toUri();
+
+
             repositoryCarteira.save(novaCarteira);
 
             return ResponseEntity.created(uri).build();
