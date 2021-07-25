@@ -157,8 +157,6 @@ services:
         spring.datasource.url="jdbc:mysql://docker.host.internal:3306/desafioproposta?useTimezone=true&serverTimezone=UTC&createDatabaseIfNotExist=true"
       network_mode: bridge
 
-
-
   mysql:
     image: mysql:latest
     restart: always
